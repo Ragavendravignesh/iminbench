@@ -1,0 +1,11 @@
+insert into Project values
+('P01','Rebranding Application','ragav@gmail.com,mani@gmail.com','julius@gmail.com',2,'null','Java','FSADM');
+
+insert into Project values
+('P02','Migration Application','ragav@gmail.com','julius@gmail.com',2,'null','IVS','FSADM');
+
+insert into Project values
+('P03','Enhancement','mathan@gmail.com,vignesh@gmail.com','julius@gmail.com',2,'null','DNA','FSADM');
+
+insert into Project values
+('P04','Maintainence','varsha@gmail.com,vignesh@gmail.com','julius@gmail.com',2,'hi','.NET','FSADM');

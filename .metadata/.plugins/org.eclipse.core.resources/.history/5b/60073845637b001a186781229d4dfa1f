@@ -1,0 +1,9 @@
+server.port=8081
+spring.application.name=LoginSignUpMS
+spring.datasource.url=jdbc:h2:~/loginsignup
+server.servlet.context-path=/LoginSignUpMS
+
+spring.h2.console.enabled=true
+spring.h2.console.path=/h2
+spring.datasource.platform=h2
+server.http2.enabled=true

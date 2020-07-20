@@ -1,0 +1,13 @@
+package com.example.demo.controller;
+
+public class Practice {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String name="ragav@gmail.com,malar@gmail.com";
+		String names[]=name.split(",");
+		System.out.println(names);
+	}
+
+}

@@ -1,0 +1,15 @@
+package com.example.demo.controller;
+
+public class Practice {
+	public static void main(String args[]) {
+		String list="ragav,kamal,dhoni,sachin";
+		String nameList[]=list.split(",");
+		String nstring="";
+		for(String name:nameList) {
+			if(name.equals("ragav"))
+				continue;
+		nstring+=name+",";
+		}
+		System.out.println(nstring);
+	}
+}

@@ -1,0 +1,15 @@
+package com.example.demo.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dto.ProjectDTO;
+import com.example.demo.exception.ProjectException;
+
+@Service
+public interface ProjectService {
+	public List<ProjectDTO> getProjects() throws ProjectException;
+	public ProjectDTO getProject() throws ProjectException;
+	public String storeProject(ProjectDTO projectDTO) throws ProjectException;
+}

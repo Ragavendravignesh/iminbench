@@ -1,0 +1,9 @@
+package com.example.demo.service;
+
+import com.example.demo.dto.FresherDTO;
+import com.example.demo.exception.FresherException;
+
+public interface FresherService {
+	public boolean isRegistered(String emailid) throws FresherException;
+	public String register(FresherDTO fresherDTO) throws FresherException;
+}

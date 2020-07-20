@@ -1,0 +1,2 @@
+insert into Project values
+('P01','Rebranding Application','ragav@gmail.com,mani@gmail.com','julius@gmail.com',2,'Java','FSADM');

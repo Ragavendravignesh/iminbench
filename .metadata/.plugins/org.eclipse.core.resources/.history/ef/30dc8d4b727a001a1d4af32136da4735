@@ -1,0 +1,67 @@
+package com.example.demo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.example.demo.dto.ProjectDTO;
+import com.example.demo.entity.Project;
+import com.example.demo.exception.ProjectException;
+import com.example.demo.repository.ProjectRepo;
+
+public class ProjectServiceImpl implements ProjectService{
+
+	@Autowired 
+	ProjectRepo projectRepo;
+	
+	@Autowired
+	ProjectDTO ProjectDTO;
+	
+	public List<ProjectDTO> getProjects() throws ProjectException {
+		try {
+			List<Project> list= projectRepo.findAll();
+			List<ProjectDTO> dtoList=new ArrayList<>();
+			for(Project prj:list) {
+				dtoList.add(ProjectDTO.toProjectDTO(prj));
+			}
+			return dtoList;
+		}catch(Exception ex) {
+			throw new ProjectException("No data");
+		}
+	}
+
+
+	public ProjectDTO getProject(String prjid) throws ProjectException {
+		try {
+			Optional<Project> prj=projectRepo.findById(prjid);
+			//ProjectDTO prjDTO=ProjectDTO.toProjectDTO(prj);
+			ProjectDTO prjDTO=new ProjectDTO();
+			prjDTO.setProjectID(prj.get().getProjectID());
+			prjDTO.setUnit(prj.get().getUnit());
+			prjDTO.setSkillsRequired(prj.get().getSkillsRequired());
+			prjDTO.setAppliedList(prj.get().getAppliedList());
+			prjDTO.setDescription(prj.get().getDescription());
+			prjDTO.setManagerId(prj.get().getProjectID());
+			prjDTO.setNoOfDemand(prj.get().getNoOfDemand());
+			return prjDTO;
+		}catch(Exception ex) {
+			throw new ProjectException("Project Not found");
+		}
+	}
+
+	public String storeProject(ProjectDTO projectDTO) throws ProjectException {
+		try {
+			if(projectRepo.existsById(projectDTO.getProjectID())) {
+				throw new ProjectException("Project Already exits with same id");
+			}
+			else {
+				projectRepo.saveAndFlush(ProjectDTO.toProjectEntity(projectDTO));
+				return "Added Successfully";
+			}
+		}catch(Exception ex) {
+			throw new ProjectException("Sorry Not able to add project");
+		}
+	}
+}

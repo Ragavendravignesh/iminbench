@@ -1,0 +1,62 @@
+package com.example.demo.service;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.demo.dao.FresherRepo;
+import com.example.demo.dto.FresherDTO;
+import com.example.demo.entity.Fresher;
+import com.example.demo.exception.FresherException;
+
+@Service
+public class FresherServiceImpl implements FresherService {
+	
+	@Autowired
+	FresherRepo fresherRepo;
+	
+	@Autowired 
+	FresherDTO FresherDTO;
+	
+	public boolean isRegistered(String emailid) throws FresherException {
+		try {
+			boolean isRegister=fresherRepo.existsById(emailid);
+			return isRegister;
+		}catch (Exception e) {
+			throw new FresherException(e.getMessage());			
+		}	
+	}
+	public String register(FresherDTO fresherDTO) throws FresherException {
+		Fresher fresher=FresherDTO.toFresherEntity(fresherDTO);
+		try {
+			if(fresherRepo.existsById(fresher.getEmailid()))
+				return "Sorry Already Registered";
+			else {
+				fresherRepo.saveAndFlush(fresher);
+				return "Registered Successfully";
+			}
+			
+		}catch (Exception e) {
+			throw new FresherException("Something went wrong");
+		}
+	}
+	public List<FresherDTO> getRegisteredPeople(String[] appliedIds) throws FresherException {
+		try {
+			List<Fresher> fresherList=fresherRepo.findAll();
+			List<FresherDTO> registeredList=new ArrayList<>();
+			for(Fresher fresher:fresherList) {
+				for(String appliedId: appliedIds) {
+					if(fresher.getEmailid().equals(appliedId)) {
+						registeredList.add(FresherDTO.toFresherDTO(fresher));
+					}
+				}
+			}
+			
+			return registeredList;
+		}catch (Exception e) {
+			throw new FresherException("Unable to get Data");
+		}
+	}
+}

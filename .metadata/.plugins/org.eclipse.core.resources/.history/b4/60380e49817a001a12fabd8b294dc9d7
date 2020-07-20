@@ -1,0 +1,4 @@
+
+insert into Project(projectID,Description,unit,skillsRequired,managerId,noOfDemand,appliedList) values
+('P01','Rebranding Application','FSADM','Java','julius@gmail.com',2,'ragav@gmail.com,mani@gmail.com');
+
